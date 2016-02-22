@@ -1,17 +1,18 @@
 travel(List, Result) :-
     permute(List, P),
     [Head | Tail] = P,
-    travelhelper(Tail, Head),
-    Result = Head.
+    travelhelper(Tail, Head, X),
+    Result = X.
     
-travelhelper([], _).
+travelhelper([], X, X).
     
-travelhelper([Head | Tail], Current) :-
+travelhelper([Head | Tail], Current, Answer) :-
     smaller(Head, Current, X),
-    write(X),
+    write(Current),
     nl(),
-    travelhelper(Tail, X).
-
+    travelhelper(Tail, X, Y),
+    Answer = Y.
+    
 
 smaller(X, Y, Y) :-
     totaldistancetraveled(X, ResX),
