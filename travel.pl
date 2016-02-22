@@ -50,13 +50,13 @@ smaller(X, Y, X) :-
 % the total distance traveled from one location to that
 % same location is 0
 %
-totaldistancetraveled([[City1, [X1, Y1]]], Result) :-
+totaldistancetraveled([[_, [_, _]]], Result) :-
     Result is 0.
 
 % calculates the distance traveled in one trip
 %
-totaldistancetraveled([[City1, [X1, Y1]] | Rest], Result) :-
-    [[City2, [X2, Y2]] | More] = Rest,
+totaldistancetraveled([[_, [X1, Y1]] | Rest], Result) :-
+    [[_, [X2, Y2]] | _] = Rest,
     distancebetween(X1, Y1, X2, Y2, PartialResult),
     totaldistancetraveled(Rest, RemainingResult),
     Result is PartialResult + RemainingResult.
@@ -68,7 +68,7 @@ printcities([]).
 
 % takes the detailed list and prints out the city names followed by newlines
 %
-printcities([[X | Y] | Rest]) :-
+printcities([[X | _] | Rest]) :-
     write(X),
     nl(),
     printcities(Rest).
